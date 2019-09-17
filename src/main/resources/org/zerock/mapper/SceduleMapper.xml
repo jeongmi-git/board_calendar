@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.SceduleMapper">
+
+	<insert id="addCart">
+		insert into GAJA_SCECART (scecart_num,member_id, contenttypeid, contentname
+		,content_id)
+		values(SEQ_GAJA_SCECART.nextval,#{member_id},#{contenttypeid},#{contentname},#{content_id})
+	</insert>
+
+	<select id="showCart" resultType="org.zerock.domain.SceduleCartVO">
+		select * from GAJA_SCECART where member_id=#{member_id}
+	</select>
+	
+	<select id="chkItem" resultType="String">
+		select contentname from GAJA_SCECART where member_id=#{member_id} and content_id = #{content_id}
+	</select>
+</mapper>

@@ -29,7 +29,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-
+<bean id="sceduleCartVO" class="org.zerock.domain.SceduleCartVO"></bean>
+<bean id="scheduleVO" class="org.zerock.domain.ScheduleVO"></bean>
 <mybatis-spring:scan base-package="org.zerock.mapper"/>
 		
 		<context:component-scan base-package="org.zerock.service"></context:component-scan>
