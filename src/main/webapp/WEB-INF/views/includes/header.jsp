@@ -359,15 +359,15 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                            <a href="/uploadFile/uploadForm"><i class="fa fa-files-o fa-fw"></i> 파일업로드 테스트<span class="fa arrow"></span></a>
+                           <!--  <ul class="nav nav-second-level">
                                 <li>
                                     <a href="blank.html">Blank Page</a>
                                 </li>
                                 <li>
                                     <a href="login.html">Login Page</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>

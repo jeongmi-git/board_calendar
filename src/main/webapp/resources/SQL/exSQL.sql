@@ -77,3 +77,61 @@ create table GAJA_SCHEDULE (
 ALTER TABLE GAJA_SCHEDULE ADD CONSTRAINT FK_GAJA_SCHEDULE FOREIGN KEY(MEMBER_ID) REFERENCES MEMBER_TABLE(MEMBER_ID);
 ALTER TABLE GAJA_SCHEDULE ADD CONSTRAINT FK_GAJA_SCHEDULE FOREIGN KEY(SCECART_NUM) REFERENCES GAJA_SCECART(SCECART_NUM);
 
+
+CREATE TABLE TBL_ATTACH(
+	uuid VARCHAR2(100) NOT NULL,
+	uploadPath varchar2(200) not null,
+	fileName varchar2(100) not null,
+	filetype char(1) default 'I',
+	bno number(10,0)
+);
+alter table tbl_attach add constraint pk_attach primary key (uuid);
+alter table tbl_attach add constraint fk_board_attach foreign key (bno) references tbl_board(bno);
+
+drop  table users purge;
+
+create table users(
+	username varchar2(50) not null primary key,
+	password varchar2(50) not null,
+	enabled char(1 )default '1'
+);
+
+create table authorities(
+ username varchar2(50) not null,
+ authority varchar2(50) not null,
+ constraint fk_authorities_user foreign key(username) references users(username)
+ );
+
+ create unique index ix_auth_username on authorities (username, authority);
+
+ drop index ix_auth_username;
+
+ insert into users(username, password) values('user00','pw00');
+ insert into users(username, password) values('member00','pw00');
+ insert into users(username, password) values('admin00','pw00');
+ 
+ 
+ insert into authorities(username, authority) values('user00','ROLE_USER');
+ insert into authorities(username, authority) values('member00','ROLE_MANAGER');
+ insert into authorities(username, authority) values('admin00','ROLE_MANAGER');
+ insert into authorities(username, authority) values('admin00','ROLE_ADMIN');
+ 
+-- 인증/ 권한을 위한 테이블
+drop table tbl_member purge;
+
+create table tbl_member(
+	userid varchar2(50) not null primary key,
+	userpw varchar2(100) not null,
+	username varchar2(100) not null,
+	regdate date default sysdate,
+	updatedate date default sysdate,
+	enabled char(1) default '1'
+	
+);
+
+create table tbl_member_auth(
+	userid varchar2(50) not null,
+	auth varchar2(50) not null,
+	constraint fk_member_auth foreign key (userid) references tbl_member(userid)
+);
+

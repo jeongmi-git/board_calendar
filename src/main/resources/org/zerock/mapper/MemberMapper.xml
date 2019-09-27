@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.MemberMapper">
+	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+		<id property="userid" column="userid" />
+		<result property="userid" column="userid" />
+		<result property="userpw" column="userpw" />
+		<result property="userName" column="userName" />
+		<result property="regDate" column="regdate" />
+		<result property="updateDate" column="updatedate" />
+		<collection property="authList" column="authMap">
+		</collection>
+	</resultMap>
+
+	<resultMap type="org.zerock.domain.AuthVO" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	<!--LEFT OUTER JOIN
+	 먼저 좌측 테이블에 해당하는 데이터를 읽은 후 나중 표기된 우측 테이블에서 JOIN대상 데이터를 읽어옴 
+	 즉 table A,B를 비교해서 B의 JOIN 컬럼에서 같은 값이 있을때 해당 데이터를 가져오고 B의 JOIN
+	 컬럼 같은 값이 없는 경우에는 B테이블에서 가져오는 컬럼들은 NULL 값으로 채웁니다.  -->
+	<select id="read" resultMap="memberMap">
+		SELECT
+		mem.userid,userpw,username,enabled,regdate,updatedate,auth FROM
+		tbl_member mem LEFT OUTER JOIN tbl_member_auth auth on
+		mem.userid=auth.userid
+		where mem.userid=#{userid}
+	</select>
+</mapper>
